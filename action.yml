@@ -1,6 +1,15 @@
-              
-- name: Github Action for LaTeX
-
-
-              
-  uses: xu-cheng/latex-action@3.2.0
+name: Build LaTeX document
+on: [tag]
+jobs:
+  build_latex:
+    steps:
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: card.tex
+        latexmk_use_xelatex: true
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: card.pdf
+          path: card.pdf
